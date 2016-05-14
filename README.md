@@ -1,7 +1,7 @@
 This is a sample project Build in Node JS with demo Redis and elasticsearch Api's integrated.
 
 Requirement:	
-Node.js 
+Node.js    
 Redis 	
 Elasticsearch 	
 Express.js 	
