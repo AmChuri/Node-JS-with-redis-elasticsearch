@@ -1,11 +1,11 @@
 This is a sample project Build in Node JS with demo Redis and elasticsearch Api's integrated.
 
-Requirement:
+Requirement:	
 Node.js 
-Redis 
-Elasticsearch 
-Express.js 
-Body Parser 
+Redis 	
+Elasticsearch 	
+Express.js 	
+Body Parser 	
 
 Steps:
 1) Install all requirements from official node.js site and npm
