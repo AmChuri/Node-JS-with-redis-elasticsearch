@@ -1,0 +1,24 @@
+{
+  "name": "Node-JS-with-redis-elasticsearch",
+  "version": "0.8.0",
+  "description": "sample Node Js with redis and elasticsearch",
+  "main": "sample.js",
+  "scripts": {
+    "start": "node sample.js"},
+  "dependencies": {
+    "express": "4.2.0",
+    "body-parser": "1.15.1",
+    "redis": "3.2.0",
+    "elasticsearch": "11.0.1"
+  },
+  "devDependencies": {   
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kingman21/Node-JS-with-redis-elasticsearch"
+  },
+  "author": "Amay Churi",
+  "license": "None",
+  "readmeFilename": "README.md",
+}
+
