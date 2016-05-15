@@ -3,28 +3,31 @@ var app = express();
 var bodyParser = require('body-parser');
 var redis=require('redis');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-var clientredis = redis.createClient();
+var clientredis = redis.createClient(); //creating Redis Client
 var elasticsearch = require('elasticsearch');
 
+//creating Elasticsearch Client
 var client = new elasticsearch.Client({
   host: 'localhost:9200',
   log: 'trace',
   keepAlive: 'true'
 });
 
-var stringsample;
+var stringsample; //Taking variable to store value
 
+//Using Express App to render HTML page
 app.use(express.static('public'));
+
 app.get('/index.html', function (req, res) {
    res.sendFile( __dirname + "/" + "index.html" );
 })
 app.post('/post',urlencodedParser, function(req, res) {
 stringsample=req.body.string;
 console.log(stringsample);
-runSample(stringsample)
-runelastic(stringsample)
+runSample(stringsample) //callback to update redis value
+runelastic(stringsample) //callback to update elasticsearch value
 clientredis.get("string", function (err, reply) {
-	res.send(reply.toString());
+	res.send(reply.toString()); //Redenring back value from Redis
 })
 var sample = req.body.username;
 
@@ -42,19 +45,14 @@ var server = app.listen(8081, function () {
 
 })
 
-clientredis.on("connect",runSample);
+clientredis.on("connect",runSample); //Starting Function to update Redis Value
 function runSample(stringsample) {
 clientredis.set("string",stringsample,function(err, reply){
         console.log(reply.toString());
     });
-/*clientredis.get("string", function (err, reply) {
-	console.log(reply.toString());
-//redisdata(reply)
-})*/
-//clientredis.keys('*', function (keys) { for (key in keys) { console.log(key); } });
 }
 
-function runelastic(stringsample){
+function runelastic(stringsample){ //Function to update Elasticsearch Value
 client.ping({
   requestTimeout: 30000,
 
@@ -68,7 +66,7 @@ client.ping({
   }
 });
 }
-function searchsample(stringsample){
+function searchsample(stringsample){ //Function to Search in Elasticsearch
 client.search({
   q: stringsample
 }).then(function (body) {
